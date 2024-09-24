@@ -1,8 +1,8 @@
-package com.exercise.usermetadata.user;
+package com.exercise.accounts.user;
 
-import com.exercise.usermetadata.github.GithubRepo;
-import com.exercise.usermetadata.github.GithubService;
-import com.exercise.usermetadata.github.GithubUser;
+import com.exercise.accounts.github.GithubRepo;
+import com.exercise.accounts.github.GithubService;
+import com.exercise.accounts.github.GithubUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +14,11 @@ public class UserService {
     @Autowired
     private GithubService githubService;
 
-    public User getUserById(String id) {
-        GithubUser githubUser = githubService.getGithubUserById(id);
+    public User getUserByUsername(String id) {
+        // TODO handle errors
+        GithubUser githubUser = githubService.getGithubUserByUsername(id);
 
-        List<GithubRepo> githubUserRepos = githubService.getGithubReposByUserId(id);
+        List<GithubRepo> githubUserRepos = githubService.getGithubReposByUsername(id);
 
         return newUserFromGithubResponses(githubUser, githubUserRepos);
     }
@@ -31,7 +32,7 @@ public class UserService {
         out.setGeoLocation(user.getLocation());
         out.setEmail(user.getEmail());
         out.setUrl(user.getHtmlUrl());
-        out.setCreatedAt(user.getCreateAt());
+        out.setCreatedAt(user.getCreatedAt());
 
         List<UserRepo> userRepos = repos.stream().map(repo -> {
             UserRepo userRepo = new UserRepo();

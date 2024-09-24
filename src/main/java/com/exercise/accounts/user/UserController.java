@@ -1,4 +1,4 @@
-package com.exercise.usermetadata.user;
+package com.exercise.accounts.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,9 +15,10 @@ public class UserController {
     private UserService userService;
 
     // Endpoint to get user data by id
-    @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable String id) {
-        User user = userService.getUserById(id);
+    @GetMapping("/{username}")
+    public ResponseEntity<User> getUserByUsername(@PathVariable String username) {
+        // TODO handle errors
+        User user = userService.getUserByUsername(username);
         return ResponseEntity.ok(user);
     }
 }

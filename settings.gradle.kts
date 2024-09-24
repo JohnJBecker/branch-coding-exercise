@@ -1,1 +1,1 @@
-rootProject.name = "usermetadata"
+rootProject.name = "accounts"

@@ -1,10 +1,10 @@
-package com.exercise.usermetadata;
+package com.exercise.accounts;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class UsermetadataApplicationTests {
+class AccountsApplicationTests {
 
 	@Test
 	void contextLoads() {

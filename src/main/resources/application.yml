@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: accounts
+  cache:
+    redis:
+      time-to-live: 3600s
+
+github:
+  api:
+    url: https://api.github.com
+
+feign:
+  client:
+    config:
+      githubClient:
+        connectTimeout: 5000 # 5 seconds connection timeout
+        readTimeout: 10000   # 10 seconds read timeout
