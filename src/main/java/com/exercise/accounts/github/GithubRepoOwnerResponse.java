@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-public class GithubRepoOwner implements Serializable {
+public class GithubRepoOwnerResponse implements Serializable {
     @JsonProperty("login")
     private String login;
 

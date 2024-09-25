@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class GithubUser implements Serializable {
+public class GithubUserResponse implements Serializable {
     @JsonProperty("login")
     private String login;
 

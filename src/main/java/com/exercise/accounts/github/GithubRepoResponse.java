@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class GithubRepo implements Serializable {
+public class GithubRepoResponse implements Serializable {
     @JsonProperty("id")
     private Long id;
 
@@ -20,7 +20,7 @@ public class GithubRepo implements Serializable {
     private String fullName;
 
     @JsonProperty("owner")
-    private GithubRepoOwner owner;
+    private GithubRepoOwnerResponse owner;
 
     @JsonProperty("html_url")
     private String htmlUrl;

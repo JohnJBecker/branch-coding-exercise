@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@FeignClient(name = "githubClient", url = "${github.api.url}")
+@FeignClient(name = "githubClient", url = "${github.api.url}", configuration = GithubClientConfig.class)
 public interface GithubClient {
 
     @GetMapping("/users/{username}")
-    GithubUser getUserByUsername(@PathVariable("username") String username);
+    GithubUserResponse getUserByUsername(@PathVariable("username") String username);
 
     @GetMapping("/users/{username}/repos")
-    List<GithubRepo> getReposByUsername(@PathVariable("username") String username);
+    List<GithubRepoResponse> getReposByUsername(@PathVariable("username") String username);
 }

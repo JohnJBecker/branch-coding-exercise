@@ -20,11 +20,13 @@ repositories {
 extra["springCloudVersion"] = "2023.0.3"
 
 dependencies {
-	implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
 	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("com.fasterxml.jackson.core:jackson-databind")
+	implementation("org.springframework.boot:spring-boot-starter-logging")
 	implementation("org.springframework.boot:spring-boot-starter-data-redis")
 	implementation("org.springframework.boot:spring-boot-starter-cache")
+
+	implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
+	implementation("com.fasterxml.jackson.core:jackson-databind")
 
 	implementation("org.projectlombok:lombok")
 	annotationProcessor("org.projectlombok:lombok")

@@ -17,7 +17,10 @@ public class UserController {
     // Endpoint to get user data by id
     @GetMapping("/{username}")
     public ResponseEntity<User> getUserByUsername(@PathVariable String username) {
-        // TODO handle errors
+        if (!UserValidation.isValidUsername(username)) {
+            throw new InvalidUserNameException(username);
+        }
+
         User user = userService.getUserByUsername(username);
         return ResponseEntity.ok(user);
     }

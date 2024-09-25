@@ -1,8 +1,8 @@
 package com.exercise.accounts.user;
 
-import com.exercise.accounts.github.GithubRepo;
+import com.exercise.accounts.github.GithubRepoResponse;
 import com.exercise.accounts.github.GithubService;
-import com.exercise.accounts.github.GithubUser;
+import com.exercise.accounts.github.GithubUserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,37 +14,23 @@ public class UserService {
     @Autowired
     private GithubService githubService;
 
-    public User getUserByUsername(String id) {
-        // TODO handle errors
-        GithubUser githubUser = githubService.getGithubUserByUsername(id);
+    public User getUserByUsername(String username) {
 
-        List<GithubRepo> githubUserRepos = githubService.getGithubReposByUsername(id);
+        GithubUserResponse githubUser = githubService.getGithubUserByUsername(username);
 
-        return newUserFromGithubResponses(githubUser, githubUserRepos);
-    }
+        List<GithubRepoResponse> githubUserRepos = githubService.getGithubReposByUsername(username);
 
-    private User newUserFromGithubResponses(GithubUser user, List<GithubRepo> repos) {
-        User out = new User();
-
-        out.setUserName(user.getLogin());
-        out.setDisplayName(user.getName());
-        out.setAvatar(user.getAvatarUrl());
-        out.setGeoLocation(user.getLocation());
-        out.setEmail(user.getEmail());
-        out.setUrl(user.getHtmlUrl());
-        out.setCreatedAt(user.getCreatedAt());
-
-        List<UserRepo> userRepos = repos.stream().map(repo -> {
-            UserRepo userRepo = new UserRepo();
-
-            userRepo.setName(repo.getName());
-            userRepo.setUrl(repo.getHtmlUrl());
-
-            return userRepo;
-        }).toList();
-
-        out.setRepos(userRepos);
-
-        return out;
+        return new User(
+                githubUser.getLogin(),
+                githubUser.getName(),
+                githubUser.getAvatarUrl(),
+                githubUser.getLocation(),
+                githubUser.getEmail(),
+                githubUser.getHtmlUrl(),
+                githubUser.getCreatedAt(),
+                githubUserRepos.stream()
+                        .map(repo -> new UserRepo(repo.getName(), repo.getHtmlUrl()))
+                        .toList()
+        );
     }
 }

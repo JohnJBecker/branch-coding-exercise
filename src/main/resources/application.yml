@@ -3,7 +3,11 @@ spring:
     name: accounts
   cache:
     redis:
-      time-to-live: 3600s
+      timeToLiveMillis: 5000
+
+logging:
+  level:
+    root: INFO
 
 github:
   api:
@@ -12,6 +16,6 @@ github:
 feign:
   client:
     config:
-      githubClient:
-        connectTimeout: 5000 # 5 seconds connection timeout
-        readTimeout: 10000   # 10 seconds read timeout
+      github:
+        connectTimeoutMillis: 5000 # 5 seconds connection timeout
+        readTimeoutMillis: 10000   # 10 seconds read timeout

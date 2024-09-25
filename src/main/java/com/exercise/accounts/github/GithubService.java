@@ -1,6 +1,6 @@
 package com.exercise.accounts.github;
 
-
+import com.exercise.accounts.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -14,12 +14,20 @@ public class GithubService {
     private GithubClient githubClient;
 
     @Cacheable(value = "githubUserCache", key = "#username")
-    public GithubUser getGithubUserByUsername(String username) {
-        return githubClient.getUserByUsername(username);
+    public GithubUserResponse getGithubUserByUsername(String username) {
+        try {
+            return githubClient.getUserByUsername(username);
+        } catch (NotFoundException ex) {
+            throw new NotFoundException("github user not found");
+        }
     }
 
     @Cacheable(value = "githubReposCache", key = "#username")
-    public List<GithubRepo> getGithubReposByUsername(String username) {
-        return githubClient.getReposByUsername(username);
+    public List<GithubRepoResponse> getGithubReposByUsername(String username) {
+        try {
+            return githubClient.getReposByUsername(username);
+        } catch (NotFoundException ex) {
+            throw new NotFoundException("github user's repos not found");
+        }
     }
 }
