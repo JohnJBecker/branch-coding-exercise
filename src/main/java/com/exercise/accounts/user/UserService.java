@@ -14,6 +14,10 @@ public class UserService {
     @Autowired
     private GithubService githubService;
 
+    public UserService(GithubService githubService) {
+        this.githubService = githubService;
+    }
+
     public User getUserByUsername(String username) {
 
         GithubUserResponse githubUser = githubService.getGithubUserByUsername(username);

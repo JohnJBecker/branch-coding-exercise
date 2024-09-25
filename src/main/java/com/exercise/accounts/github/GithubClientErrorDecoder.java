@@ -13,7 +13,7 @@ public class GithubClientErrorDecoder implements ErrorDecoder {
     public Exception decode(String methodKey, Response response) {
         // Customize your error handling based on the response status
         return switch (response.status()) {
-            case 404 -> new NotFoundException("not found");
+            case 404 -> new NotFoundException("github user not found");
             case 500, 503 -> new ServiceUnavailableErrorException(response.reason());
             default -> defaultErrorDecoder.decode(methodKey, response);
         };

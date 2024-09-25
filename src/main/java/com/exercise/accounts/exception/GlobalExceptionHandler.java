@@ -1,7 +1,6 @@
 package com.exercise.accounts.exception;
 
 
-import com.exercise.accounts.user.InvalidUserNameException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

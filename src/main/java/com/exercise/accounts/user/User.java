@@ -1,6 +1,7 @@
 package com.exercise.accounts.user;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,29 +12,29 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class User {
-    @JsonProperty("user_name")
     private String userName;
-
-    @JsonProperty("display_name")
     private String displayName;
-
-    @JsonProperty("avatar")
     private String avatar;
-
-    @JsonProperty("geo_location")
     private String geoLocation;
-
-    @JsonProperty("email")
     private String email;
-
-    @JsonProperty("url")
     private String url;
-
-    @JsonProperty("created_at")
     private LocalDateTime createdAt;
-
-    @JsonProperty("repos")
     private List<UserRepo> repos;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User user)) return false;
+        return userName.equals(user.userName) &&
+                displayName.equals(user.displayName) &&
+                avatar.equals(user.avatar) &&
+                geoLocation.equals(user.geoLocation) &&
+                email.equals(user.email) &&
+                url.equals(user.url) &&
+                createdAt.equals(user.createdAt) &&
+                repos.equals(user.repos);
+    }
 }
 

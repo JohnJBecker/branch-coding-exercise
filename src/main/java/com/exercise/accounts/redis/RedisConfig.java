@@ -20,7 +20,13 @@ import java.time.Duration;
 public class RedisConfig {
 
     @Value("${spring.cache.redis.timeToLiveMillis}")
-    private long ttl;  // TTL in milliseconds
+    private long ttl;
+
+    @Value("${spring.cache.redis.host}")
+    private String host;
+
+    @Value("${spring.cache.redis.port}")
+    private int port;
 
     @Bean
     public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
@@ -40,7 +46,7 @@ public class RedisConfig {
     // Custom LettuceConnectionFactory with limited reconnect attempts
     @Bean
     public LettuceConnectionFactory redisConnectionFactory() {
-        RedisStandaloneConfiguration redisConfig = new RedisStandaloneConfiguration("localhost", 6379);
+        RedisStandaloneConfiguration redisConfig = new RedisStandaloneConfiguration(host, port);
 
         // Customize ClientOptions to limit reconnection attempts
         ClientOptions clientOptions = ClientOptions.builder()

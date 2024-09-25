@@ -38,7 +38,7 @@ public class RedisCacheErrorHandler implements CacheErrorHandler {
 
     private void handleRedisException(RuntimeException exception) {
         if (exception instanceof RedisSystemException) {
-            log.warn("Redis error occurred, proceeding without caching.");
+            log.warn("Redis system error occurred, proceeding without caching.");
         } else {
             throw exception;
         }
